@@ -1,0 +1,84 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local player = Players.LocalPlayer
+
+local function InitiateSprint()
+    local char = player.Character or player.CharacterAdded:Wait()
+    local hum = char:WaitForChild("Humanoid")
+    
+    -- Cleanup UI
+    if player.PlayerGui:FindFirstChild("UniversalSprintUI") then
+        player.PlayerGui.UniversalSprintUI:Destroy()
+    end
+
+    local gui = Instance.new("ScreenGui", player.PlayerGui)
+    gui.Name = "UniversalSprintUI"
+    gui.ResetOnSpawn = false
+
+    -- [1. CREAM ROUND BUTTON]
+    local btn = Instance.new("TextButton", gui)
+    btn.Size = UDim2.new(0, 85, 0, 85)
+    btn.Position = UDim2.new(0.82, 0, 0.42, 0) 
+    btn.BackgroundColor3 = Color3.fromRGB(210, 190, 160) -- Cream color from your image
+    btn.Text = "SPRINT"
+    btn.TextColor3 = Color3.fromRGB(0, 0, 0)
+    btn.Font = Enum.Font.SourceSansBold
+    btn.TextSize = 20
+    
+    local corner = Instance.new("UICorner", btn)
+    corner.CornerRadius = UDim.new(1, 0)
+    
+    local stroke = Instance.new("UIStroke", btn)
+    stroke.Thickness = 2
+    stroke.Color = Color3.fromRGB(0, 0, 0)
+
+    -- [2. THIN STAMINA BAR]
+    local barFrame = Instance.new("Frame", gui)
+    barFrame.Size = UDim2.new(0, 200, 0, 8)
+    barFrame.Position = UDim2.new(0.79, 0, 0.94, 0)
+    barFrame.BackgroundColor3 = Color3.fromRGB(40, 35, 30)
+    
+    local barFill = Instance.new("Frame", barFrame)
+    barFill.Size = UDim2.new(1, 0, 1, 0)
+    barFill.BackgroundColor3 = Color3.fromRGB(210, 190, 160) -- Matching cream color
+    barFill.BorderSizePixel = 0
+    
+    Instance.new("UICorner", barFrame).CornerRadius = UDim.new(0, 4)
+    Instance.new("UICorner", barFill).CornerRadius = UDim.new(0, 4)
+
+    -- [3. UNIVERSAL SPRINT LOGIC]
+    local stamina = 500
+    local isSprinting = false
+    local HARDCORE_SPEED = 19 -- High speed for Rush Mode & Hardcore
+    local NORMAL_SPEED = 16
+
+    -- Support for both Mouse and Touch
+    btn.MouseButton1Down:Connect(function()
+        if stamina > 5 then isSprinting = true end
+    end)
+    btn.MouseButton1Up:Connect(function()
+        isSprinting = false
+    end)
+
+    -- Force speed update every frame to bypass Anti-Cheat resets
+    RunService.Stepped:Connect(function()
+        if not hum or not hum.Parent then return end
+        
+        if isSprinting and stamina > 0 and hum.MoveDirection.Magnitude > 0 then
+            hum.WalkSpeed = HARDCORE_SPEED
+            stamina = math.max(0, stamina - 0.6)
+            workspace.CurrentCamera.FieldOfView = 85 -- FOV effect
+        else
+            isSprinting = false
+            hum.WalkSpeed = NORMAL_SPEED
+            stamina = math.min(100, stamina + 0.3)
+            workspace.CurrentCamera.FieldOfView = 70
+        end
+        
+        barFill.Size = UDim2.new(stamina/100, 0, 1, 0)
+    end)
+end
+
+-- Execution
+player.CharacterAdded:Connect(InitiateSprint)
+if player.Character then InitiateSprint() end
