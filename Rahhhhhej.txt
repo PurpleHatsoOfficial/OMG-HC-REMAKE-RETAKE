@@ -27,8 +27,8 @@ local entity = Spawner:Create({
 		Values = {1.5, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
 	},
 	Movement = {
-		Speed = 30,
-		Delay = 2,
+		Speed = 20,
+		Delay = 1,
 		Reversed = false
 	},
 	Rebounding = {
@@ -41,7 +41,7 @@ local entity = Spawner:Create({
 	Damage = {
 		Enabled = true,
 		IgnoreHiding = true,
-		Range = 50,
+		Range = 40,
 		Amount = 450
 	},
 	Crucifixion = {
@@ -53,7 +53,7 @@ local entity = Spawner:Create({
 	Death = {
 		Type = "Guiding", -- "Curious"
 		Hints = {"Death", "Hints", "Go", "Here"},
-		Cause = ""
+		Cause = "Deer God"
 	}
 })
 
