@@ -47,10 +47,10 @@ local function InitiateSprint()
     Instance.new("UICorner", barFill).CornerRadius = UDim.new(0, 4)
 
     -- [3. UNIVERSAL SPRINT LOGIC]
-    local stamina = 500
+    local stamina = 300
     local isSprinting = false
-    local HARDCORE_SPEED = 19 -- High speed for Rush Mode & Hardcore
-    local NORMAL_SPEED = 16
+    local HARDCORE_SPEED = 20 -- High speed for Rush Mode & Hardcore
+    local NORMAL_SPEED = 15
 
     -- Support for both Mouse and Touch
     btn.MouseButton1Down:Connect(function()
@@ -71,11 +71,11 @@ local function InitiateSprint()
         else
             isSprinting = false
             hum.WalkSpeed = NORMAL_SPEED
-            stamina = math.min(100, stamina + 0.3)
+            stamina = math.min(300, stamina + 0.3)
             workspace.CurrentCamera.FieldOfView = 70
         end
         
-        barFill.Size = UDim2.new(stamina/100, 0, 1, 0)
+        barFill.Size = UDim2.new(stamina/300, 0, 1, 0)
     end)
 end
 
