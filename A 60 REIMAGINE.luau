@@ -5,7 +5,7 @@ local spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/Regul
 local entity = spawner.Create({
 	Entity = {
 		Name = "A-60 Reimagine",
-		Asset = "https://github.com/PurpleHatsoOfficial/Hardcore-STuff/raw/refs/heads/main/A60%20REIMAGINE.rbxm",
+		Asset = "https://github.com/PurpleHatsoOfficial/OMG-HC-REMAKE-RETAKE/raw/refs/heads/main/V3%20A60%20Reimagine.rbxm",
 		HeightOffset = 0
 	},
 	Lights = {
@@ -17,7 +17,7 @@ local entity = spawner.Create({
 		Repair = false
 	},
 	Earthquake = {
-		Enabled = false
+		Enabled = true
 	},
 	CameraShake = {
 		Enabled = true,
@@ -44,13 +44,13 @@ local entity = spawner.Create({
 	Crucifixion = {
 		Enabled = true,
 		Range = 40,
-		Resist = true,
+		Resist = false,
 		Break = true
 	},
 	Death = {
 		Type = "Guiding", -- "Curious"
 		Hints = {"Death", "Hints", "Go", "Here"},
-		Cause = "A-60 Reimagine"
+		Cause = "A-60"
 	}
 })
 
