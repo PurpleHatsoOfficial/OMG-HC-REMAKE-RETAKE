@@ -11,7 +11,7 @@ local entity = Spawner:Create({
 	Entity = {
 		Name = "Ripper",
 		Asset = "rbxassetid://71660969514467",
-		HeightOffset = 5
+		HeightOffset = 7
 	},
 	Lights = {
 		Flicker = {
@@ -19,7 +19,7 @@ local entity = Spawner:Create({
 			Duration = 2
 		},
 		Shatter = false,
-		Repair = true
+		Repair = false
 	},
 	Earthquake = {
 		Enabled = true
@@ -30,7 +30,7 @@ local entity = Spawner:Create({
 		Values = {6, 20, 0.1, 1} -- Magnitude, Roughness, FadeIn, FadeOut
 	},
 	Movement = {
-		Speed = 100,
+		Speed = 138,
 		Delay = 6,
 		Reversed = false
 	},
@@ -50,7 +50,7 @@ local entity = Spawner:Create({
 	Crucifixion = {
 		Enabled = true,
 		Range = 40,
-		Resist = true,
+		Resist = false,
 		Break = true
 	},
 	Death = {
